@@ -160,7 +160,7 @@ func (a *AbstractManager) consume(r Reply, receive func(r Reply) (UpdateStatus, 
 
 	status, ok := <-updStatus
 	if !ok {
-		return true // channel closed due to receive func error result
+		return false // channel closed due to receive func error result
 	}
 	switch status {
 	case UpdateFalse:
@@ -168,7 +168,7 @@ func (a *AbstractManager) consume(r Reply, receive func(r Reply) (UpdateStatus, 
 		a.update <- true
 	case UpdateFinish:
 		a.update <- true
-		return true
+		return false
 	}
 	return false
 }

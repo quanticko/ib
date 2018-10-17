@@ -1,5 +1,7 @@
 package ib
 
+import "fmt"
+
 // InstrumentManager .
 type InstrumentManager struct {
 	AbstractManager
@@ -54,16 +56,29 @@ func (i *InstrumentManager) receive(r Reply) (UpdateStatus, error) {
 		switch r.Type {
 		case TickLast:
 			i.last = r.Price
+			//fmt.Println("LastSize: ", r.Size)
 		case TickBid:
 			i.bid = r.Price
+			//fmt.Println("BidSize: ", r.Size)
 		case TickAsk:
 			i.ask = r.Price
+			//fmt.Println("AskSize: ", r.Size)
+		}
+	case *TickSize:
+		r := r.(*TickSize)
+		switch r.Type {
+		case TickLast:
+			fmt.Println("LastSize: ", r.Size)
+		case TickBid:
+			fmt.Println("BidSize: ", r.Size)
+		case TickAsk:
+			fmt.Println("AskSize: ", r.Size)
 		}
 	}
 
-	if i.last <= 0 && (i.bid <= 0 || i.ask <= 0) {
+	/*if i.last <= 0 && (i.bid <= 0 || i.ask <= 0) {
 		return UpdateFalse, nil
-	}
+	}*/
 	return UpdateTrue, nil
 }
 

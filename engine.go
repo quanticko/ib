@@ -316,6 +316,7 @@ func (e *Engine) deliverToObserver(c chan<- Reply, r Reply) {
 			return
 		case <-time.After(time.Duration(5) * time.Second):
 			log.Printf("Waited 5 seconds for reply channel %v\n", c)
+			return
 		}
 	}
 }
