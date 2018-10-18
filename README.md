@@ -68,4 +68,7 @@ extend this exception to your version of the library.
 * This library is safe for use in close-source applications. The LGPL
   share-alike terms do not apply to applications built on top of this library.
 * You do not need a commercial license. The LGPL applies to the library's own
-  source code, not your applications.
+  source code, not your applications
+
+Change to test if Glide pick ups the latest version
+.
